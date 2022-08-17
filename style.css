@@ -1,6 +1,35 @@
-body{
-   min-width: 608px;
-} 
+@media (max-width: 700px){
+    body{
+        min-width: 620px;
+        max-width: 660px;
+    } 
+
+    .move-mobile img{
+        width: 175px;
+    }
+    
+    .img-up{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        transform: rotate(180deg);
+    }
+    
+    .img-right{
+        transform: rotate(270deg);
+    }
+    
+    .img-left{
+        transform: rotate(90deg);
+    }
+    
+    .second-row{
+        display: block;
+        text-align: center;
+        /* margin-left: auto;
+        margin-right: auto;   */
+    }
+}
 
 canvas{
     display: block;
@@ -12,28 +41,6 @@ a{
     color: red;
 }
 
-.move-mobile img{
-    width: 175px;
-}
-
-.img-up{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    transform: rotate(180deg);
-}
-
-.img-right{
-    transform: rotate(270deg);
-}
-
-.img-left{
-    transform: rotate(90deg);
-}
-
-.second-row{
-    display: block;
-    text-align: center;
-    /* margin-left: auto;
-    margin-right: auto;   */
+.move-mobile{
+    display: none;
 }
