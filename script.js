@@ -29,20 +29,20 @@ document.addEventListener("keydown", direction);
 let dir;
 
 function moveDown(){
-    var evt = new KeyboardEvent('keydown', {'keyCode':40, 'which':40});
-    document.dispatchEvent(evt);
+    if(dir != "up")
+        dir = "down";
 }
 function moveUp(){
-    var evt = new KeyboardEvent('keydown', {'keyCode':38, 'which':38});
-    document.dispatchEvent(evt);
+    if(dir != "down")
+        dir = "up";
 }
 function moveLeft(){
-    var evt = new KeyboardEvent('keydown', {'keyCode':37, 'which':37});
-    document.dispatchEvent(evt);
+    if(dir != "right")
+        dir = "left";
 }
 function moveRight(){
-    var evt = new KeyboardEvent('keydown', {'keyCode':39, 'which':39});
-    document.dispatchEvent(evt);
+    if(dir != "left")
+        dir = "right";
 }
 
 function direction(event){
