@@ -1,3 +1,7 @@
+body{
+    background: linear-gradient(45deg, #777676, #f2f4f5);;
+}
+
 canvas{
     display: block;
     margin: 0 auto;
@@ -6,4 +10,30 @@ a{
     display: block;
     text-align: center;
     color: red;
+}
+
+.move-mobile img{
+    width: 150px;
+}
+
+.img-up{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotate(180deg);
+}
+
+.img-right{
+    transform: rotate(270deg);
+}
+
+.img-left{
+    transform: rotate(90deg);
+}
+
+.second-row{
+    display: block;
+    text-align: center;
+    /* margin-left: auto;
+    margin-right: auto;   */
 }
