@@ -1,6 +1,6 @@
-body{
-    background: linear-gradient(45deg, #777676, #f2f4f5);;
-}
+/* body{
+    background: linear-gradient(45deg, #777676, #f2f4f5);
+} */
 
 canvas{
     display: block;
@@ -13,7 +13,7 @@ a{
 }
 
 .move-mobile img{
-    width: 150px;
+    width: 200px;
 }
 
 .img-up{
