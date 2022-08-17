@@ -15,6 +15,8 @@ let food = {
     x: Math.floor((Math.random() * 17 + 1)) * box,
     y: Math.floor((Math.random() * 15 + 3)) * box
 };
+let colorHard =true;
+let hardModeActive = false;
 
 let snake = [];
 snake[0]= {
@@ -40,21 +42,71 @@ function direction(event){
 function eatTail(head, arr){
     for(let i = 0; i < arr.length; i++){
         if(head.x == arr[i].x && head.y == arr[i].y){
+            ctx.fillStyle = "white";
+            if(score<20){
+                ctx.font = "37px Arial";
+                ctx.fillText("Game over, loser! Your score "+ score, box*1, box*10);
+            }
+            else if(score<=40){
+                ctx.font = "43px Arial";
+                ctx.fillText("Game over! Your score "+ score, box*1.5, box*10);
+            }
+            else if(score<254){
+                ctx.font = "37px Arial";
+                ctx.fillText("U so crazy maaaan! Your score "+ score, box*1, box*10);
+            }
+            else if(score>253){
+                ctx.font = "60px Arial";
+                ctx.fillText("U F*CKEN CHEATER!!!", box*1, box*10);
+            }
             clearInterval(game);
         }
     }
 
 }
 
+function newFood(arr){
+    food = {
+        x: Math.floor((Math.random() * 17 + 1)) * box,
+        y: Math.floor((Math.random() * 15 + 3)) * box
+    };
+    for(let i = 0; i < arr.length; i++){
+        if(food.x == arr[i].x && food.y == arr[i].y){
+            newFood(arr);    
+        }
+    }        
+}
+
+function hardMode(){
+    clearInterval(game);
+    game = setInterval(drawGame, 70);  
+    hardModeActive = true;  
+}
+
+
 function drawGame(){
     ctx.drawImage(ground, 0, 0);
 
     ctx.drawImage(foodImg, food.x, food.y);
 
+    if (hardModeActive){
+        if (colorHard){
+            ctx.fillStyle = "gray";
+            colorHard = false;
+        }
+        else{
+            ctx.fillStyle = "black";
+            colorHard =true;
+        }
+        ctx.font = "30px Arial";
+        ctx.fillText("Very hard mode", box*12, box*1.5);
+    } 
+
     for(let i = 0; i<snake.length; i++){
         ctx.fillStyle = i == 0 ? "green" : "red";
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
     }
+      
 
     ctx.fillStyle = "white";
     ctx.font = "50px Arial";
@@ -65,10 +117,11 @@ function drawGame(){
 
     if(snakeX == food.x && snakeY == food.y){
         score++;
-        food = {
-            x: Math.floor((Math.random() * 17 + 1)) * box,
-            y: Math.floor((Math.random() * 15 + 3)) * box
-        };
+        newFood(snake);
+        // food = {
+        //     x: Math.floor((Math.random() * 17 + 1)) * box,
+        //     y: Math.floor((Math.random() * 15 + 3)) * box
+        // };
     }else{
         snake.pop();   
     } 
