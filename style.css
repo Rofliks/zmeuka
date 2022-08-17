@@ -1,8 +1,11 @@
-@media (max-width: 700px){
+@media (max-width: 800px){
     body{
         min-width: 620px;
-        max-width: 660px;
     } 
+
+    .move-mobile{
+        display:block;
+    }
 
     .move-mobile img{
         width: 175px;
@@ -40,7 +43,8 @@ a{
     text-align: center;
     color: red;
 }
-
-.move-mobile{
-    display: none;
+@media (min-width: 800px){
+    .move-mobile{
+        display: none;
+    }
 }
