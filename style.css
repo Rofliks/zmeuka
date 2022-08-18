@@ -34,15 +34,30 @@
     }
 }
 
+#restart{
+    visibility: hidden;
+    display: block;
+    margin: auto;
+    font-size: 20px;
+    border-radius: 20px;
+    border-width: 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px 30px 10px 30px;
+    background: linear-gradient(45deg, #EECFBA, #C5DDE8);
+    color: rgb(61, 80, 61);
+}
+
 canvas{
     display: block;
     margin: 0 auto;
 }
+
 a{
     display: block;
-    text-align: center;
+    text-align: right;
     color: red;
 }
+
 @media (min-width: 800px){
     .move-mobile{
         display: none;

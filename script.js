@@ -81,9 +81,14 @@ function eatTail(head, arr){
                 ctx.fillText("U F*CKEN CHEATER!!!", box*1, box*10);
             }
             snakeDead = true;
+            document.getElementById("restart").style.visibility = "visible";
         }
     }
 
+}
+
+function reloadPage(){
+    window.location.reload();
 }
 
 //create food
@@ -99,19 +104,23 @@ function newFood(arr){
     }        
 }
 
+//turn hard mode
 function hardMode(){
     speedGame = 50; 
     hardModeActive = true;  
 }
 
+//speed of turn
 function needDrawGame(){
     if (!start) 
         start = (+new Date);
 }
 
+//game text
 function drawGame(){
     if (snakeDead)
         return false;
+   
     ctx.drawImage(ground, 0, 0);
 
     ctx.drawImage(foodImg, food.x, food.y);
