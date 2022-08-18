@@ -82,6 +82,7 @@ function eatTail(head, arr){
             }
             snakeDead = true;
             document.getElementById("restart").style.visibility = "visible";
+            document.getElementById("restart-mobile").style.visibility = "visible";
         }
     }
 

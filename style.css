@@ -32,19 +32,22 @@
         /* margin-left: auto;
         margin-right: auto;   */
     }
-}
 
-#restart{
-    visibility: hidden;
-    display: block;
-    margin: auto;
-    font-size: 20px;
-    border-radius: 20px;
-    border-width: 0px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 10px 30px 10px 30px;
-    background: linear-gradient(45deg, #EECFBA, #C5DDE8);
-    color: rgb(61, 80, 61);
+    #restart-mobile{
+        visibility: hidden;
+        display: block;
+        margin: auto;
+        font-size: 50px;
+        border-radius: 60px;
+        border-width: 0px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        padding: 30px 80px 30px 80px;
+        background: linear-gradient(45deg, #EECFBA, #C5DDE8);
+        color: rgb(61, 80, 61);
+    }
+    #restart{
+        display: none;
+    }
 }
 
 canvas{
@@ -60,6 +63,22 @@ a{
 
 @media (min-width: 800px){
     .move-mobile{
+        display: none;
+    }
+
+    #restart{
+        visibility: hidden;
+        display: block;
+        margin: auto;
+        font-size: 20px;
+        border-radius: 20px;
+        border-width: 0px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        padding: 10px 30px 10px 30px;
+        background: linear-gradient(45deg, #EECFBA, #C5DDE8);
+        color: rgb(61, 80, 61);
+    }
+    #restart-mobile{
         display: none;
     }
 }
