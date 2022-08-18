@@ -8,26 +8,28 @@ const foodImg = new Image();
 foodImg.src = "img/food.png";
 
 let box = 32;
-
 let score = 0;
-
 let food = {
     x: Math.floor((Math.random() * 17 + 1)) * box,
     y: Math.floor((Math.random() * 15 + 3)) * box
 };
+
 let colorHard =true;
 let hardModeActive = false;
-
 let snake = [];
 snake[0]= {
     x: 9*box,
     y: 10*box
 };
 
+let dir;
+let speedGame = 150;
+let snakeDead = false;
+let start = null;
+
 document.addEventListener("keydown", direction);
 
-let dir;
-
+//move on mobile
 function moveDown(){
     if(dir != "up")
         dir = "down";
@@ -45,6 +47,7 @@ function moveRight(){
         dir = "right";
 }
 
+//direction of snake
 function direction(event){
     if(event.keyCode == 37 && dir != "right")
         dir = "left";
@@ -56,6 +59,7 @@ function direction(event){
         dir = "down";
 }
 
+//dead snake
 function eatTail(head, arr){
     for(let i = 0; i < arr.length; i++){
         if(head.x == arr[i].x && head.y == arr[i].y){
@@ -76,12 +80,13 @@ function eatTail(head, arr){
                 ctx.font = "60px Arial";
                 ctx.fillText("U F*CKEN CHEATER!!!", box*1, box*10);
             }
-            clearInterval(game);
+            snakeDead = true;
         }
     }
 
 }
 
+//create food
 function newFood(arr){
     food = {
         x: Math.floor((Math.random() * 17 + 1)) * box,
@@ -95,13 +100,18 @@ function newFood(arr){
 }
 
 function hardMode(){
-    clearInterval(game);
-    game = setInterval(drawGame, 70);  
+    speedGame = 50; 
     hardModeActive = true;  
 }
 
+function needDrawGame(){
+    if (!start) 
+        start = (+new Date);
+}
 
 function drawGame(){
+    if (snakeDead)
+        return false;
     ctx.drawImage(ground, 0, 0);
 
     ctx.drawImage(foodImg, food.x, food.y);
@@ -123,57 +133,55 @@ function drawGame(){
         ctx.fillStyle = i == 0 ? "green" : "red";
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
     }
-      
+    
 
     ctx.fillStyle = "white";
     ctx.font = "50px Arial";
     ctx.fillText(score, box*2.5, box*1.7);
 
-    let snakeX = snake[0].x;
-    let snakeY = snake[0].y;
 
-    if(snakeX == food.x && snakeY == food.y){
-        score++;
-        newFood(snake);
-        // food = {
-        //     x: Math.floor((Math.random() * 17 + 1)) * box,
-        //     y: Math.floor((Math.random() * 15 + 3)) * box
-        // };
-    }else{
-        snake.pop();   
-    } 
+    needDrawGame();
+    if(((+new Date) - start)>speedGame){
+        start = null;
 
-    // if(snakeX < box || snakeX > box*17  || snakeY < 3*box  || snakeY > box*17 ){
-    //     clearInterval(game);
-    // }
-    
+        let snakeX = snake[0].x;
+        let snakeY = snake[0].y;
 
-    if(dir == "left") snakeX -= box;
-    if(dir == "right") snakeX += box;
-    if(dir == "down") snakeY += box;
-    if(dir == "up") snakeY -= box;
+        if(snakeX == food.x && snakeY == food.y){
+            score++;
+            newFood(snake);
+        }else{
+            snake.pop();   
+        }
 
-    if(snakeX < box){
-        snakeX = box*17; 
+        if(dir == "left") snakeX -= box;
+        if(dir == "right") snakeX += box;
+        if(dir == "down") snakeY += box;
+        if(dir == "up") snakeY -= box;
+
+        if(snakeX < box){
+            snakeX = box*17; 
+        }
+        else if(snakeX > box*17){
+            snakeX = box;
+        }
+        else if(snakeY < 3*box){
+            snakeY = box*17;
+        }
+        else if(snakeY > box*17){
+            snakeY = 3*box;
+        }
+
+        let newHead = {
+            x: snakeX,
+            y: snakeY
+        };
+
+        eatTail(newHead, snake);
+
+        snake.unshift(newHead);
     }
-    else if(snakeX > box*17){
-        snakeX = box;
-    }
-    else if(snakeY < 3*box){
-        snakeY = box*17;
-    }
-    else if(snakeY > box*17){
-        snakeY = 3*box;
-    }
-
-    let newHead = {
-        x: snakeX,
-        y: snakeY
-    };
-
-    eatTail(newHead, snake);
-
-    snake.unshift(newHead);
+    window.requestAnimationFrame(drawGame);
 }
 
-let game = setInterval(drawGame, 150);
+window.requestAnimationFrame(drawGame);
